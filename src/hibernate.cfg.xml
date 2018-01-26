@@ -29,6 +29,14 @@
   		   4)validate会和数据库中的表进行比较，若.hbm.xml文件中的列在数据表中不存在，则抛出异常 -->
   	<property name="hibernate.hbm2ddl.auto">update</property>
   	
+  	<!-- 设置hibernate的事务隔离级别 -->
+  	<!-- Oracle支持两种事务隔离级别：READ COMMITED(读已提交数据)和SERIALIZABLE(串行化)，Oracle默认READ COMMITED。
+  	MySQL支持四种事务隔离级别：READ UNCOMMIT(读未提交数据)、READ COMMITED(读已提交数据)、REPEATABLE READ(可重复读)、
+  	 SERIALIZABLE(串行化)，MySQL默认REPEATABLE READ。
+  	 四种事务隔离级别设置如下：
+  	 1、READ UNCOMMIT  2、READ COMMITED   4、REPEATABLE READ  8、SERIALIZABLE-->
+  	 <property name="hibernate.connection.isolation">2</property>
+  	
   	<!-- 指定关联的.hbm.xml文件 -->
   	<mapping resource="com/amaker/bean/News.hbm.xml"/>
   	<mapping resource="com/amaker/bean/User.hbm.xml"/>

@@ -11,6 +11,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.Transaction;
 
 import com.amaker.bean.User;
 import com.amaker.dao.UserDao;
@@ -46,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void save(User u) {
 		Session session=new HibernateUtil().getSession3();
-		org.hibernate.Transaction transaction=session.beginTransaction();//开始事务
+		Transaction transaction=session.beginTransaction();//开始事务
 		
 		try {
 			session.save(u);//执行保存操作
@@ -85,7 +86,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void delete(int id) {
 		Session session=new HibernateUtil().getSession3();
-		org.hibernate.Transaction transaction=session.beginTransaction();//开始事务
+		Transaction transaction=session.beginTransaction();//开始事务
 		try {
 			User u=session.get(User.class,new Integer(id));
 			session.delete(u);
@@ -111,11 +112,31 @@ public class UserDaoImpl implements UserDao {
 //		}
 	}
 
+	/**
+	 * flush():使数据表中的记录和Session缓存中的对象的状态保持一致。为了保持一致，则可能会发送对应的SQL语句。
+	 * 1.在Transaction的commit()的方法中:先调用session的flush()方法,再提交事务。
+	 * 2.flush()方法可能会发送SQL语句，但不会提交事务
+	 * 3.注意：在未提交事务或显式的调用session.flush()方法之前，也有可能会进行flush()操作。
+	 * 1).执行HQL或QBC查询，会先进行flush()操作，以得到数据表的最新的记录
+	 * 2).若记录的ID是由底层数据库使用自增的方式生成的，则在调用save()方法后，就会立即发送INSERT语句，
+	 * 因为save()方法后，必须保证对象的ID 是存在的！
+	 * 
+	 * 
+	 * reflush():会强制发送SELECT语句，以使session缓存中对象的状态和数据表中的一致。
+	 * 
+	 * clear():清理缓存
+	 * 
+	 */
 	@Override
 	public User get(int id) {
 		Session session=new HibernateUtil().getSession3();
 		try {
+			//Transaction transaction=session.beginTransaction();//开始事务
 			User u=(User)session.get(User.class,new Integer(id));
+			//u.setPassword("666");
+			//session.flush();
+			//System.out.println("flush");
+			//transaction.commit();
 			return u;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -151,7 +172,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void update(User u) {
 		Session session=new HibernateUtil().getSession3();
-		org.hibernate.Transaction transaction=session.beginTransaction();//开始事务
+		Transaction transaction=session.beginTransaction();//开始事务
 		
 		try {
 			session.update(u);//执行保存操作
