@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
-	<class name="com.amaker.bean.News" table="NewsTbl">
+	<class name="com.amaker.bean.News" table="NewsTbl" >
 		<id name="id" type="java.lang.Integer">
 			<column name="ID"/>
 			<!-- 指定主键的生成方式。native:数据库本地的方式生成 -->
@@ -16,7 +16,7 @@
 			<column name="AUTHOR"/>
 		</property>
 		
-		<property name="date" type="java.sql.Date">
+		<property name="date" type="java.util.Date">
 			<column name="DATE"/>
 		</property>
 	</class>

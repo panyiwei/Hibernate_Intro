@@ -44,12 +44,21 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 	
+	
 	@Override
 	public void save(User u) {
 		Session session=new HibernateUtil().getSession3();
 		Transaction transaction=session.beginTransaction();//开始事务
 		
 		try {
+			/**
+			 * save()方法：
+			 * 1.使一个临时对象变为持久化对象。
+			 * 2.为对象分配ID。
+			 * 3.在flush()缓存时会发送一条INSERT语句。
+			 * 4.在save()方法之前设置的ID是无效的
+			 * 5.持久化对象的ID是不能被修改的。
+			 */
 			session.save(u);//执行保存操作
 			transaction.commit();//提交
 		} catch (HibernateException e) {
