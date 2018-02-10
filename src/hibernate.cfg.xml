@@ -37,6 +37,22 @@
   	 1、READ UNCOMMIT  2、READ COMMITED   4、REPEATABLE READ  8、SERIALIZABLE-->
   	 <property name="hibernate.connection.isolation">2</property>
   	
+  	<!-- 配置C3P0数据源 -->
+  	<property name="hibernate.c3p0.max_size">10</property><!-- 数据库连接池的最大连接数 -->
+  	<property name="hibernate.c3p0.min_size">5</property>  <!-- 数据库连接池的最小连接数 -->
+  	<property name="hibernate.c3p0.acquire_increment">2</property><!-- 连接池在无空闲连接可用时一次性创建的新数据库连接数 -->
+  	
+  	<property name="hibernate.c3p0.idle_test_period">2000</property><!-- 每2000毫秒检查所有连接池中的空闲连接 -->
+  	<property name="hibernate.c3p0.timeout">2000</property><!-- 数据库连接池中连接对象在多长时间没有使用过后，就应该被销毁 -->
+  	
+  	<property name="hibernate.c3p0.max_statements"></property><!-- 缓存statement对象的数量 -->
+  	
+  	
+  	<!-- 设定JDBC的Statement读取数据的时候每次从数据库中取出的记录条数(Oracle支持，MySQL不支持) -->
+  	<property name="hibernate.jdbc.fetch_size">100</property>
+  	<!-- 设定对数据库进行批量删除、批量更新和批量插入的时候的批次大小(Oracle支持，MySQL不支持) -->
+  	<property name="hibernate.jdbc.batch_size">30</property>
+  	
   	<!-- 指定关联的.hbm.xml文件 -->
   	<mapping resource="com/amaker/bean/News.hbm.xml"/>
   	<mapping resource="com/amaker/bean/User.hbm.xml"/>

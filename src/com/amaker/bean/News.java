@@ -2,12 +2,21 @@ package com.amaker.bean;
 
 import java.util.Date;
 
+import com.mysql.jdbc.Blob;
+
 public class News {
 	private Integer id;
 	private String title;
 	private String author;
 	
 	private Date date;
+	
+	//该属性为title:author
+	private String desc;
+	//大文本
+	private String content;
+	//二进制数据
+	private Blob image;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +52,16 @@ public class News {
 		this.date = date;
 	}
 	
+	public String getDesc() {
+		return desc;
+	}
+
+
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
 	public News(String title, String author, Date date) {
 		super();
 		this.title = title;
@@ -57,5 +76,29 @@ public class News {
 	@Override
 	public String toString() {
 		return "News [id=" + id + ", title=" + title + ", author=" + author + ", date=" + date + "]";
+	}
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+	public Blob getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(Blob image) {
+		this.image = image;
 	}
 }
