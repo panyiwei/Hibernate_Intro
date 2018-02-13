@@ -28,7 +28,10 @@
 		</property>
 		
 		<!-- 映射大对象 -->
-		<property name="content" type="clob"></property>
+		<property name="content" >
+			<!-- sql-type属性可精细地指定数据库字段类型 -->
+			<column name="CONTENT" sql-type="mediumtext"/>
+		</property>
 		<property name="image" type="blob"></property>
 	</class>
 </hibernate-mapping>

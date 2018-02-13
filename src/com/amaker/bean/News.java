@@ -1,8 +1,8 @@
 package com.amaker.bean;
 
+import java.sql.Blob;
 import java.util.Date;
 
-import com.mysql.jdbc.Blob;
 
 public class News {
 	private Integer id;

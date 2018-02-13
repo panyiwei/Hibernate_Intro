@@ -2,11 +2,15 @@ package com.amaker.test;
 
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.jdbc.Work;
@@ -15,10 +19,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.amaker.bean.News;
+import com.amaker.bean.Pay;
 import com.amaker.bean.User;
+import com.amaker.bean.Worker;
 import com.amaker.dao.UserDao;
 import com.amaker.dao.impl.UserDaoImpl;
 import com.amaker.util.HibernateUtil;
+import com.atguigu.hibernate.entities.n21.Customer;
+import com.atguigu.hibernate.entities.n21.Order;
 
 public class UserDaoImplTest {
 
@@ -267,4 +275,124 @@ public class UserDaoImplTest {
 		transaction.commit();//提交
 		session.close();
 	}
+	
+	@Test
+	public void testBlob() throws Exception{
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		
+//		//保存图片二进制
+//		News news=new News();
+//		news.setAuthor("cc");
+//		news.setContent("CONTENT");
+//		news.setDate(new Date());
+//		news.setDesc("DESC");
+//		news.setTitle("CC");
+//		
+//		InputStream stream=new FileInputStream("zbj.jpg");
+//		Blob image=Hibernate.getLobCreator(session).createBlob(stream, stream.available());
+//		news.setImage(image);
+//		
+//		session.save(news);
+		
+		//获取图片
+		News news=session.get(News.class, 2);
+		Blob image=news.getImage();
+		InputStream in= image.getBinaryStream();//得到二进制流
+		System.out.println(in.available());
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
+	@Test
+	public void testComponent(){
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		
+		Worker worker=new Worker();
+		Pay pay=new Pay();
+		pay.setMonthlyPay(1000);
+		pay.setYearPay(80000);
+		pay.setVocationWithPay(5);
+		
+		worker.setName("ABCD");
+		worker.setPay(pay);
+		
+		session.save(worker);
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
+	@Test
+	public void testManyToOneGet(){
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		
+		//若查询n一端的一个对象，则默认情况下，只查询了n一端的对象，而没有查询关联的1那一端的对象（只是个代理对象）
+		Order order=(Order)session.get(Order.class, 1);
+		System.out.println(order.getOrderName());
+
+		//在需要使用到关联的对象时，才发送对应的SQL语句
+		Customer customer=order.getCustomer();
+		System.out.println(customer.getCustomerName());
+		//在查询1那一端前关闭了session会发生LazyInitializationException懒加载异常
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
+	@Test
+	public void testManyToOneSave(){
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		
+		Customer customer=new Customer();
+		customer.setCustomerName("BB");
+		Order order1=new Order();
+		order1.setOrderName("ORDER-3");
+		Order order2=new Order();
+		order2.setOrderName("ORDER-4");
+		//设定关联关系
+		order1.setCustomer(customer);
+		order2.setCustomer(customer);
+		//执行save操作
+		//先插入1的一端，在插入n的一端，只有INSERT语句。
+//		session.save(customer);
+//		session.save(order1);
+//		session.save(order2);
+		//先插入n的一端，在插入1的一端,有三条INSERT,两条UPDATE(会多出UPDATE语句)
+		session.save(order1);
+		session.save(order2);
+		session.save(customer);
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
+	@Test
+	public void testManyToOneUpdate(){
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		
+		Order order=(Order)session.get(Order.class, 1);
+		order.getCustomer().setCustomerName("AAA");
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
+	@Test
+	public void testManyToOneDelete(){
+		Session session=new HibernateUtil().getSession5();
+		Transaction transaction=session.beginTransaction();
+		//在不设定级联关系的情况下，不能直接删除1这一端的对象
+		Customer customer=(Customer)session.get(Customer.class, 1);
+		session.delete(customer);
+		
+		transaction.commit();//提交
+		session.close();
+	}
+	
 }
