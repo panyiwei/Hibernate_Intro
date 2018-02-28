@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
 	<!-- dynamic-update为true表示当更新一个对象时，会动态生成update语句，update语句中仅包含所有取值不为null的字。默认值为false -->
 	<class name="com.amaker.bean.News" table="NewsTbl" dynamic-update="true">

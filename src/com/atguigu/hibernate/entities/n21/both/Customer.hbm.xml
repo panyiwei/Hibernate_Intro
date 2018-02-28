@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.atguigu.hibernate.entities.n21.both.Customer" table="CustomersTbl" >
+		<id name="customerId" type="java.lang.Integer">
+			<column name="CUSTOMER_ID"/>
+			<generator class="native"/>
+		</id>
+		<property name="customerName" type="java.lang.String">
+			<column name="CUSTOMER_NAME" />
+		</property>
+		<!-- 映射1对多的那个集合属性 -->
+		<!-- inverse="true"为被动方，inverse="false"为主动方，由主动方维护关联关系,通常由多的一端来维护关系。
+			   table是n那端的表名 -->
+		<!--cascade设定级联操作   -->
+		<set name="orders" table="OrdersTbl" inverse="true">
+			<!-- key是端的表的外键 -->
+			<key column="CUSTOMER_ID"></key>
+			<one-to-many class="com.atguigu.hibernate.entities.n21.both.Order"/>
+		</set>
+	</class>
+</hibernate-mapping>

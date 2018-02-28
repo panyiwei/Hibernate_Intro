@@ -387,7 +387,7 @@ public class UserDaoImplTest {
 	public void testManyToOneDelete(){
 		Session session=new HibernateUtil().getSession5();
 		Transaction transaction=session.beginTransaction();
-		//在不设定级联关系的情况下，不能直接删除1这一端的对象
+		//在不设定级联关系cascade="delete" 的情况下，不能直接删除1这一端的对象
 		Customer customer=(Customer)session.get(Customer.class, 1);
 		session.delete(customer);
 		

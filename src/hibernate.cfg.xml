@@ -57,8 +57,10 @@
   	<mapping resource="com/amaker/bean/News.hbm.xml"/>
   	<mapping resource="com/amaker/bean/User.hbm.xml"/>
   	<mapping resource="com/amaker/bean/Worker.hbm.xml"/>
-  	<mapping resource="com/atguigu/hibernate/entities/n21/Customer.hbm.xml"/>
-  	<mapping resource="com/atguigu/hibernate/entities/n21/Order.hbm.xml"/>
+  	<!-- <mapping resource="com/atguigu/hibernate/entities/n21/Customer.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/entities/n21/Order.hbm.xml"/> -->
+  	<mapping resource="com/atguigu/hibernate/entities/n21/both/Customer.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/entities/n21/both/Order.hbm.xml"/>
   	
   </session-factory>
 </hibernate-configuration>
