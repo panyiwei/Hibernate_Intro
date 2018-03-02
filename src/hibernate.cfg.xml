@@ -61,6 +61,10 @@
   	<mapping resource="com/atguigu/hibernate/entities/n21/Order.hbm.xml"/> -->
   	<mapping resource="com/atguigu/hibernate/entities/n21/both/Customer.hbm.xml"/>
   	<mapping resource="com/atguigu/hibernate/entities/n21/both/Order.hbm.xml"/>
+  	<!-- <mapping resource="com/atguigu/hibernate/one2one/foreign/Department.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/one2one/foreign/Manager.hbm.xml"/> -->
+  	<mapping resource="com/atguigu/hibernate/one2one/primary/Department.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/one2one/primary/Manager.hbm.xml"/>
   	
   </session-factory>
 </hibernate-configuration>

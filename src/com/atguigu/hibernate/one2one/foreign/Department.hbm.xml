@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.atguigu.hibernate.one2one.foreign.Department" table="DepartmentTbl" >
+		<id name="deptId" type="java.lang.Integer">
+			<column name="DEPT_ID"/>
+			<generator class="native"/>
+		</id>
+		<property name="deptName" type="java.lang.String">
+			<column name="DEPT_NAME" />
+		</property>
+		
+		<!-- 使用many-to-one的方式来映射1对1关联关系;加上约束unique="true"就变成1对1关系 -->
+		<many-to-one name="mgr" class="com.atguigu.hibernate.one2one.foreign.Manager" unique="true">
+			<column name="MGR_ID"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>
