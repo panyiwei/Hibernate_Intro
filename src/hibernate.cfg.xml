@@ -65,6 +65,8 @@
   	<mapping resource="com/atguigu/hibernate/one2one/foreign/Manager.hbm.xml"/> -->
   	<mapping resource="com/atguigu/hibernate/one2one/primary/Department.hbm.xml"/>
   	<mapping resource="com/atguigu/hibernate/one2one/primary/Manager.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/n2n/Category.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/n2n/Item.hbm.xml"/>
   	
   </session-factory>
 </hibernate-configuration>
