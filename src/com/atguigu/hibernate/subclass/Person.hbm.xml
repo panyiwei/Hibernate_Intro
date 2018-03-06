@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<!-- discriminator-value 是 此父类在辨别者列中的值 -->
+	<class name="com.atguigu.hibernate.subclass.Person" table="PersonTbl" discriminator-value="PERSON" >
+		<id name="id" type="java.lang.Integer">
+			<column name="ID"/>
+			<generator class="native"/>
+		</id>
+		<!-- 配置辨别者列 -->
+		<discriminator column="TYPE" type="string" ></discriminator>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="age" type="int">
+			<column name="AGE" />
+		</property>
+		
+		<!-- 映射子类student，使用subclass进行映射。与父类在同一张表中，所以不用写table属性 -->
+		<!-- discriminator-value 是 子类在辨别者列中的值 -->
+		<subclass name="com.atguigu.hibernate.subclass.Student" discriminator-value="STUDENT">
+			<property name="school" type="string" column="SCHOOL"></property>
+		</subclass>
+	</class>
+</hibernate-mapping>

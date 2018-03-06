@@ -7,7 +7,7 @@
 	<class name="com.amaker.bean.User" table="UserTbl">
 		<id name="id" type="java.lang.Integer">
 			<column name="id"/>
-			<!-- 指定主键的生成方式。native:根据底层数据库能力选择indentity、sequence或者hilo中的一个 -->
+			<!-- 指定主键的生成方式。native:根据底层数据库能力选择identity、sequence或者hilo中的一个 -->
 			<generator class="native"/>
 		</id>
 		
