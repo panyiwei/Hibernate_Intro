@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<!-- lazy属性可控制是“立即检索加载”还是“懒加载”。只对load()方法有效，get()方法和Query的list()方法在类级别总是使用立即检索 -->
+	<!-- batch-size 批量初始化 -->
+	<class name="com.atguigu.hibernate.strategy.Customer" table="CustomersTbl" lazy="true" batch-size="5">
+		<id name="customerId" type="java.lang.Integer">
+			<column name="CUSTOMER_ID"/>
+			<generator class="native"/>
+		</id>
+		<property name="customerName" type="java.lang.String">
+			<column name="CUSTOMER_NAME" />
+		</property>
+		
+		<!-- 在1-n或n-n中lazy属性控制是否“懒加载” -->
+		<!-- batch-size 一次初始化多少集合 -->
+		<!-- 当 fetch 取值为subselect时，batch-size属性失效; fetch 取值为join时,lazy属性失效。  -->
+		<!-- batch-size存在时，fetch=join失效 -->
+		<set name="orders" table="OrdersTbl" inverse="true" 
+		  order-by="ORDER_NAME DESC" lazy="true" batch-size="2" fetch="join">
+			<key column="CUSTOMER_ID"></key>
+			<one-to-many class="com.atguigu.hibernate.strategy.Order"/>
+		</set>
+	</class>
+</hibernate-mapping>

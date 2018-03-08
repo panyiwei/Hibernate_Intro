@@ -58,9 +58,9 @@
   	<mapping resource="com/amaker/bean/User.hbm.xml"/>
   	<mapping resource="com/amaker/bean/Worker.hbm.xml"/>
   	<!-- <mapping resource="com/atguigu/hibernate/entities/n21/Customer.hbm.xml"/>
-  	<mapping resource="com/atguigu/hibernate/entities/n21/Order.hbm.xml"/> -->
+  	<mapping resource="com/atguigu/hibernate/entities/n21/Order.hbm.xml"/> 
   	<mapping resource="com/atguigu/hibernate/entities/n21/both/Customer.hbm.xml"/>
-  	<mapping resource="com/atguigu/hibernate/entities/n21/both/Order.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/entities/n21/both/Order.hbm.xml"/> -->
   	<!-- <mapping resource="com/atguigu/hibernate/one2one/foreign/Department.hbm.xml"/>
   	<mapping resource="com/atguigu/hibernate/one2one/foreign/Manager.hbm.xml"/> -->
   	<mapping resource="com/atguigu/hibernate/one2one/primary/Department.hbm.xml"/>
@@ -70,6 +70,8 @@
   	<!-- <mapping resource="com/atguigu/hibernate/subclass/Person.hbm.xml"/> 
   	<mapping resource="com/atguigu/hibernate/joined/subclass/Person.hbm.xml"/> -->
   	<mapping resource="com/atguigu/hibernate/union/subclass/Person.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/strategy/Customer.hbm.xml"/>
+  	<mapping resource="com/atguigu/hibernate/strategy/Order.hbm.xml"/>
 
   	
   </session-factory>

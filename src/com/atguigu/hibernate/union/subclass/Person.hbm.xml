@@ -4,6 +4,7 @@
 	<class name="com.atguigu.hibernate.union.subclass.Person" table="PersonTbl" >
 		<id name="id" type="java.lang.Integer">
 			<column name="ID"/>
+			<!-- 在union-subclass关系中，generator属性不能使用identity和native -->
 			<generator class="increment"/>
 		</id>
 		<property name="name" type="java.lang.String">

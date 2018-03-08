@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.atguigu.hibernate.strategy.Order" table="OrdersTbl" >
+		<id name="orderId" type="java.lang.Integer">
+			<column name="ORDER_ID"/>
+			<generator class="native"/>
+		</id>
+		<property name="orderName" type="java.lang.String">
+			<column name="ORDER_NAME" />
+		</property>
+		
+		<!-- lazy=false立即检索，lazy=proxy延迟检索 -->
+		<!-- fetch 取值为join时,lazy属性失效,使用迫切左外连接的方式初始化 n 关联的 1 的一端的属性 -->
+		<many-to-one name="customer" class="com.atguigu.hibernate.strategy.Customer" lazy="false"
+		 fetch="join">
+			<column name="CUSTOMER_ID"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>
